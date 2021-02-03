@@ -5,4 +5,8 @@
         this.doorId = doorId;
     }
 
+    public bool OpensDoor(int id){
+        return doorId == id;
+    }
+
 }
