@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item{
+public abstract class Item{
     // Properties
     public string name{ protected set; get; }
     public float weight{ protected set; get; }
