@@ -2,17 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+public class Item{
+    // Properties
+    public string name{ protected set; get; }
+    public float weight{ protected set; get; }
+
+
+    // Constructor
+    public Item(string name, float weight){
+        this.name = name;
+        this.weight = weight;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // Example of polymorphism
+    //
+    // public Item(float weight){
+    //    name = "Unnamed";
+    //    this.weight = weight;
+    // }
+
+    // Methods
 }
