@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Tests : MonoBehaviour{
-    public Inventory inventory;
+    private Inventory inventory;
     void Start(){
+        inventory = new Inventory(150);
         //TestCreateItem();
         TestInventoryFunctionality();
     }
