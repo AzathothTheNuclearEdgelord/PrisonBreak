@@ -37,6 +37,19 @@ public class Inventory : MonoBehaviour{
                 }
             }
         }
+
+        return false;
+    }
+
+    public bool CanSolveRiddle(string input){
+        foreach (Item item in items){
+            if (item is PuzzleItem){
+                if (((PuzzleItem) item).SolvesRiddle(input)){
+                    return true;
+                }
+            }
+        }
+
         return false;
     }
 
@@ -47,7 +60,7 @@ public class Inventory : MonoBehaviour{
     public float GetCurrentWeight(){
         return weight;
     }
-    
+
     public void DebugInventory(){
         print($"Inventory has {Count()} items");
         print($"Total weight {GetCurrentWeight()}");

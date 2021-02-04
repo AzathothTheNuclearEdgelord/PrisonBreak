@@ -38,6 +38,7 @@ public class Tests : MonoBehaviour{
         Item i = new AccessItem("Key of Doom", 10, 1);
         Item j = new BonusItem("Potato of the Gods", 50, 100);
         Item k = new BonusItem("Potato of Death", 50, 50);
+        Item m = new BonusItem("Riddle of the Damned", 50, 50);
 
         AddItemToInventory(i);
         AddItemToInventory(j);
@@ -54,6 +55,10 @@ public class Tests : MonoBehaviour{
             print($"Opened the door of Death aka 2");
         else
             print("Door of Death not opened");
+
+        if (inventory.CanSolveRiddle("42")){
+            
+        }
     }
 
     void AddItemToInventory(Item item){
