@@ -15,8 +15,14 @@ public class Inventory {
     public Inventory(float maxWeight) : this(){
         this.maxWeight = maxWeight;
     }
-    
-    // public bool SetMaxWeight()
+
+    public bool SetMaxWeight(float maximumWeight){
+        if (maximumWeight >= weight){
+            maxWeight = maximumWeight;
+            return true;
+        }
+        return false;
+    }
 
     public bool AddItem(Item i){
         if (weight + i.weight <= maxWeight){
