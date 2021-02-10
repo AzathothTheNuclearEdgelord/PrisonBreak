@@ -2,12 +2,14 @@
     // Properties
     public string name{ get; private set; }
     public float weight{ get; private set; }
+    // public int itemId{ get; private set; }
 
 
     // Constructor
     public Item(string name, float weight){
         this.name = name;
         this.weight = weight;
+        // itemId = int
     }
 
     // Example of polymorphism

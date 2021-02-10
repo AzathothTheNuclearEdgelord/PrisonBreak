@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerManager : MonoBehaviour{
     private Inventory inventory;
@@ -13,11 +14,20 @@ public class PlayerManager : MonoBehaviour{
         return inventory.AddItem(item);
     }
 
-    public bool RemoveItem(Item item){
-        Debug.Log($"Removing item {item.name}");
-        return inventory.RemoveItem(item);
-        // Instantiate(item.gameObject);
+    private void Update(){
+        if (Input.GetKeyDown(KeyCode.E)){
+            DropItem("Key of Death");
+        }
     }
+
+    public void DropItem(string name){
+        Item item = inventory.GetItemWithName(name);
+        if (item != null){
+            inventory.RemoveItem(item);
+            GameManager.Instance.DorpItem(name, transform.position + transform.forward);
+        }
+    }
+    
     private void OnControllerColliderHit(ControllerColliderHit hit){
         if (hit.gameObject.CompareTag("Interactable")){
             IInteractables i = hit.gameObject.GetComponent<IInteractables>();

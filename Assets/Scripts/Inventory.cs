@@ -34,6 +34,15 @@ public class Inventory {
             return false;
     }
 
+    public Item GetItemWithName(string name){
+        for (int i = 0; i < items.Count; i++){
+            if (items[i].name == name){
+                return items[i];
+            }
+        }
+        return null;
+    }
+
     public bool RemoveItem(Item i){
         bool success = items.Remove(i);
         if (success)
