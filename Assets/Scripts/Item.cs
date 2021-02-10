@@ -1,11 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public abstract class Item{
+﻿public abstract class Item{
     // Properties
-    public string name{ protected set; get; }
-    public float weight{ protected set; get; }
+    public string name{ get; private set; }
+    public float weight{ get; private set; }
 
 
     // Constructor
@@ -20,6 +16,4 @@ public abstract class Item{
     //    name = "Unnamed";
     //    this.weight = weight;
     // }
-
-    // Methods
 }

@@ -12,6 +12,12 @@ public class PlayerManager : MonoBehaviour{
         Debug.Log($"Adding item {item.name}");
         return inventory.AddItem(item);
     }
+
+    public bool RemoveItem(Item item){
+        Debug.Log($"Removing item {item.name}");
+        return inventory.RemoveItem(item);
+        // Instantiate(item.gameObject);
+    }
     private void OnControllerColliderHit(ControllerColliderHit hit){
         if (hit.gameObject.CompareTag("Interactable")){
             IInteractables i = hit.gameObject.GetComponent<IInteractables>();
