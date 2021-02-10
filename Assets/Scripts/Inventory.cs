@@ -1,17 +1,19 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory {
+public class Inventory{
     private List<Item> items;
+    private List<GameObject> gameObjects;
     private float weight;
     private float maxWeight;
 
     public Inventory(){
         items = new List<Item>();
+        gameObjects = new List<GameObject>();
         weight = 0;
         maxWeight = 100;
     }
-    
+
     public Inventory(float maxWeight) : this(){
         this.maxWeight = maxWeight;
     }
@@ -21,29 +23,55 @@ public class Inventory {
             maxWeight = maximumWeight;
             return true;
         }
+
         return false;
     }
 
-    public bool AddItem(Item i){
-        if (weight + i.weight <= maxWeight){
-            items.Add(i);
-            weight += i.weight;
-            return true;
-        }
-        else
-            return false;
+    public GameObject DropLastItem(){
+        GameObject gameObject = RemoveItem(items.Count - 1);
+        return gameObject;
     }
 
-    public bool RemoveItem(Item i){
-        bool success = items.Remove(i);
+    public bool AddItem(Item item, GameObject gameObject){
+        bool result = AddItem(item);
+        if (result)
+            gameObjects.Add(gameObject);
+
+        return result;
+    }
+
+    public bool AddItem(Item item){
+        if (weight + item.weight <= maxWeight){
+            items.Add(item);
+            weight += item.weight;
+            return true;
+        }
+        return false;
+    }
+
+    public bool RemoveItem(Item item){
+        bool success = items.Remove(item);
         if (success)
-            weight -= i.weight;
+            weight -= item.weight;
 
         return success;
     }
 
-    public bool HasItem(Item i){
-        return items.Contains(i);
+    public GameObject RemoveItem(int i){
+        if (i < 0) return null;
+        
+        bool success = RemoveItem(items[i]);
+        if (success){
+            GameObject gameObject = gameObjects[i];
+            gameObjects.Remove(gameObjects[i]);
+            return gameObject;
+        }
+        
+        return null;
+    }
+
+    public bool HasItem(Item item){
+        return items.Contains(item);
     }
 
     public bool CanOpenDoor(int id){
@@ -54,6 +82,7 @@ public class Inventory {
                 }
             }
         }
+
         return false;
     }
 
@@ -64,7 +93,7 @@ public class Inventory {
     public float GetCurrentWeight(){
         return weight;
     }
-    
+
     public void DebugInventory(){
         Debug.Log($"Inventory has {Count()} items");
         Debug.Log($"Total weight {GetCurrentWeight()}");
