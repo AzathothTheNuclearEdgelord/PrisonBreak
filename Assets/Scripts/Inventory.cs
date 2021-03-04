@@ -46,6 +46,7 @@ public class Inventory{
             weight += item.weight;
             return true;
         }
+
         return false;
     }
 
@@ -59,14 +60,14 @@ public class Inventory{
 
     public GameObject RemoveItem(int i){
         if (i < 0) return null;
-        
+
         bool success = RemoveItem(items[i]);
         if (success){
             GameObject gameObject = gameObjects[i];
             gameObjects.Remove(gameObjects[i]);
             return gameObject;
         }
-        
+
         return null;
     }
 

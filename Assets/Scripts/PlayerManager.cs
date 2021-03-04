@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerManager : MonoBehaviour{
     private Inventory inventory;
@@ -12,6 +11,17 @@ public class PlayerManager : MonoBehaviour{
     private void Update(){
         if (Input.GetKeyDown(KeyCode.Mouse0))
             DropLastItem();
+
+        if (Input.GetKeyDown(KeyCode.E)){
+            RaycastHit hit;
+
+            if (Physics.SphereCast(transform.position, 0.5f, transform.forward, out hit, 2)){
+                IInteractables i = hit.collider.gameObject.GetComponent<IInteractables>();
+                if (i != null){
+                    i.Action(this);
+                }
+            }
+        }
     }
 
     public bool AddItem(Item item, GameObject gameObject){
@@ -26,10 +36,12 @@ public class PlayerManager : MonoBehaviour{
         gameObject.SetActive(true);
     }
 
+    public bool CanOpenDoor(int id){
+        return inventory.CanOpenDoor(id);
+    }
+
     private void OnControllerColliderHit(ControllerColliderHit hit){
         if (hit.gameObject.CompareTag("Interactable")){
-            IInteractables i = hit.gameObject.GetComponent<IInteractables>();
-            i.Action(this);
         }
     }
 }
