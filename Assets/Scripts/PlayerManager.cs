@@ -17,10 +17,10 @@ public class PlayerManager : MonoBehaviour{
     */
     
     public bool AddItem(Item item){
+        /* Old AddItem code
         Debug.Log($"Adding item {item.name}");
         return inventory.AddItem(item);
-        GameManager.Instance.TriggerInventoryUIUpdate();
-        
+        */
         bool success = inventory.AddItem(item);
         if (success)
         {
