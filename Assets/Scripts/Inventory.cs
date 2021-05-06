@@ -42,6 +42,15 @@ public class Inventory {
         }
         return null;
     }
+    
+    public string[] GetItemNames()
+    { string[] result = new string[items.Count];
+        
+        for (int i=0; i<items.Count; i++) {
+            result[i] = items[i].name;
+        }
+        return result;
+    }
 
     public bool RemoveItem(Item i){
         bool success = items.Remove(i);

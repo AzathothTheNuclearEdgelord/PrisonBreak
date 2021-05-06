@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerManager : MonoBehaviour{
     private Inventory inventory;
@@ -9,23 +8,38 @@ public class PlayerManager : MonoBehaviour{
         inventory = new Inventory(initialMaxWeight);
     }
 
-    public bool AddItem(Item item){
-        Debug.Log($"Adding item {item.name}");
-        return inventory.AddItem(item);
-    }
-
+    /* Drop specific item
     private void Update(){
         if (Input.GetKeyDown(KeyCode.E)){
             DropItem("Key of Death");
         }
+    }
+    */
+    
+    public bool AddItem(Item item){
+        Debug.Log($"Adding item {item.name}");
+        return inventory.AddItem(item);
+        GameManager.Instance.TriggerInventoryUIUpdate();
+        
+        bool success = inventory.AddItem(item);
+        if (success)
+        {
+            GameManager.Instance.TriggerInventoryUIUpdate();
+        }
+        return success;
     }
 
     public void DropItem(string name){
         Item item = inventory.GetItemWithName(name);
         if (item != null){
             inventory.RemoveItem(item);
-            GameManager.Instance.DorpItem(name, transform.position + transform.forward);
+            GameManager.Instance.DropItem(name, transform.position + transform.forward);
+            GameManager.Instance.TriggerInventoryUIUpdate();
         }
+    }
+
+    public string[] GetItemNames() {
+        return inventory.GetItemNames();
     }
     
     private void OnControllerColliderHit(ControllerColliderHit hit){
